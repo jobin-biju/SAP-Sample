@@ -1,0 +1,218 @@
+{
+  "_version": "1.76.0",
+  "sap.app": {
+    "id": "manview",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.19.3",
+      "toolsId": "1d469f73-b2f4-4553-96ea-14078e308461"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/manager/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.142.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "manview.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ManagersList",
+          "target": "ManagersList"
+        },
+        {
+          "pattern": "Managers({key}):?query:",
+          "name": "ManagersObjectPage",
+          "target": "ManagersObjectPage"
+        },
+        {
+          "pattern": "Managers({key})/employees({key1}):?query:",
+          "name": "EmployeesObjectPage",
+          "target": "EmployeesObjectPage"
+        },
+        {
+          "pattern": "Managers({key})/employees({key1})/salaries({key2}):?query:",
+          "name": "SalaryObjectPage",
+          "target": "SalaryObjectPage"
+        }
+      ],
+      "targets": {
+        "ManagersList": {
+          "type": "Component",
+          "id": "ManagersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Managers",
+              "variantManagement": "Page",
+              "initialLoad": true,
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "sync": {
+                      "press": "manview.custom.CustomActions.view",
+                      "text": "View",
+                      "enabled": true,
+                      "visible": true
+                    },
+                    "fetch": {
+                      "press": "manview.custom.CustomActions.postData",
+                      "text": "Post",
+                      "enabled": true,
+                      "visible": true
+                    },
+                    "get": {
+                      "press": "manview.custom.CustomActions.dialogue",
+                      "text": "Dialogue",
+                      "enabled": true,
+                      "visible": true
+                    }
+                  }
+                }
+              },
+              "navigation": {
+                "Managers": {
+                  "detail": {
+                    "route": "ManagersObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ManagersObjectPage": {
+  "type": "Component",
+  "id": "ManagersObjectPage",
+  "name": "sap.fe.templates.ObjectPage",
+  "options": {
+    "settings": {
+      "editableHeaderContent": false,
+      "contextPath": "/Managers",
+      "navigation": {
+        "employees": {
+          "detail": {
+            "route": "EmployeesObjectPage"
+          }
+        }
+      },
+      "controlConfiguration": {
+        "employees/@com.sap.vocabularies.UI.v1.LineItem": {
+          "actions": {
+            "AddEmployeeAction": {
+              "id": "addEmployeeBtn",
+              "text": "Add Employee",
+              "press": "manview.custom.CustomActions.addemployee",
+              "requiresSelection": false,
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  }
+},
+        "EmployeesObjectPage": {
+          "type": "Component",
+          "id": "EmployeesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Employees",
+              "navigation": {
+                "salaries": {
+                  "detail": {
+                    "route": "SalaryObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SalaryObjectPage": {
+          "type": "Component",
+          "id": "SalaryObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Salary"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

@@ -1,0 +1,4 @@
+status1,status2,status3
+C,P,R
+P,C,R
+R,P,C

@@ -1,0 +1,37 @@
+<mvc:View controllerName="ui5sample.controller.dpr"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Employees">
+        <content>
+            <Table id="empTable" inset="false" items="{empModel>/Employees}">
+                <headerToolbar>
+                    <Toolbar id="_IDGenToolbar">
+                        <Title id="_IDGenTitle" text="Employee List" />
+                    </Toolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column id="_IDGenColumn1">
+                        <Text id="_IDGenText" text="Employee Name" />
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <Text id="_IDGenText1" text="Age" />
+                    </Column>
+                    <Column id="_IDGenColumn3">
+                        <Text id="_IDGenText2" text="Phone" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem">
+                        <cells>
+                            <Text id="_IDGenText3" text="{empModel>empname}" />
+                            <Text id="_IDGenText4" text="{empModel>age}" />
+                            <Text id="_IDGenText5" text="{empModel>phone}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
