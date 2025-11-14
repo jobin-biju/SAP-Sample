@@ -128,7 +128,7 @@ annotate service.Employees with @(
         TypeName       : 'Employee',
         TypeNamePlural : 'Employees',
         Title          : { $Type : 'UI.DataField', Value : empname },
-        Description    : { $Type : 'UI.DataField', Label : 'Manager', Value : manager.name }
+        Description    : { $Type : 'UI.DataField', Label : 'Managers', Value : manager.name }
 
     }, 
 
